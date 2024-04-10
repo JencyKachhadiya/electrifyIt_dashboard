@@ -79,9 +79,9 @@
 
 <div class="container mt-5">
     <div class="custom-form">
-        <form method="POST" action="{%  url 'test' %}">
-            <h3 class="mb-4 text-center">Reports</h3>
+        <form action="{%  url 'test' %}" method="GET">
             {% csrf_token %}
+            <h3 class="mb-4 text-center">Reports</h3>
             <div class="form-group">
                 <label for="startDate">Start Date:</label>
                 <input type="date" class="form-control" id="startDate" name="startDate" required>

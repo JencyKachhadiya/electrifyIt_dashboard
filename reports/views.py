@@ -4,15 +4,18 @@ from django.db.models import Sum
 from .models import Vehicle
 from django.db.models.functions import ExtractWeek, ExtractMonth, ExtractYear
 from django.views.decorators.csrf import csrf_protect
+from django.http import HttpResponse, JsonResponse
 
 
-@csrf_protect
+# @csrf_protect
 def test(request):
     total_miles = None
 
-    start_date_str = request.POST.get('startDate')
-    end_date_str = request.POST.get('endDate')
+    start_date_str = request.GET.get('startDate')
+    
 
+    end_date_str = request.GET.get('endDate')
+    return HttpResponse(start_date_str,end_date_str)
     try:
         start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date()
         end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date()
