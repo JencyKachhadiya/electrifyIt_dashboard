@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'reports',
 ]
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://electrifyitdashboard.azurewebsites.net']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
