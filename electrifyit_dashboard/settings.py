@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'reports',
 ]
 
+CSRF_COOKIE_SECURE = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
