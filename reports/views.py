@@ -3,8 +3,10 @@ from django.shortcuts import render
 from django.db.models import Sum
 from .models import Vehicle
 from django.db.models.functions import ExtractWeek, ExtractMonth, ExtractYear
+from django.views.decorators.csrf import csrf_protect
 
 
+@csrf_protect
 def test(request):
     total_miles = None
 
