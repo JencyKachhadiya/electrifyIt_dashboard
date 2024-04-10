@@ -23,5 +23,4 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('detailed_report/', views.detailed_report, name='detailed_report'),
     path('date_range_report/', views.date_range_report, name='date_range_report'),
-    path('test/', views.test, name='test'),
 ]
