@@ -7,14 +7,14 @@ from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse, JsonResponse
 
 
-# @csrf_protect
+@csrf_protect
 def test(request):
     total_miles = None
 
-    start_date_str = request.GET.get('startDate')
+    start_date_str = request.POST.get('startDate')
     
 
-    end_date_str = request.GET.get('endDate')
+    end_date_str = request.POST.get('endDate')
     return HttpResponse(start_date_str,end_date_str)
     try:
         start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date()
