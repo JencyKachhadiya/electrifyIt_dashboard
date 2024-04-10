@@ -81,7 +81,7 @@
 <div class="container mt-5">
     
     <div class="custom-form">
-        <form action="{%  url 'detailed_report' %}" method="POST">
+        <form id="reportForm" action="{%  url 'detailed_report' %}" method="POST">
             {% csrf_token %}
             <h3 class="mb-4 text-center">Detailed Report</h3>
             <div class="form-group">
@@ -157,6 +157,28 @@
             endDateInput.valueAsDate = currentDate;
         }
     }
+
+    // Store selected dates in sessionStorage
+    window.addEventListener('DOMContentLoaded', function () {
+        var startDateInput = document.getElementById('startDate');
+        var endDateInput = document.getElementById('endDate');
+
+        // Retrieve stored dates from sessionStorage
+        var storedStartDate = sessionStorage.getItem('startDate');
+        var storedEndDate = sessionStorage.getItem('endDate');
+
+        // Set input values to stored dates if they exist
+        if (storedStartDate) startDateInput.value = storedStartDate;
+        if (storedEndDate) endDateInput.value = storedEndDate;
+
+        // Add event listeners to update sessionStorage on input change
+        startDateInput.addEventListener('input', function () {
+            sessionStorage.setItem('startDate', startDateInput.value);
+        });
+        endDateInput.addEventListener('input', function () {
+            sessionStorage.setItem('endDate', endDateInput.value);
+        });
+    });
 </script>
 
 </body>
