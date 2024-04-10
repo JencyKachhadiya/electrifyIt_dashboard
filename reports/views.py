@@ -4,49 +4,25 @@ from django.db.models import Sum
 from .models import Vehicle
 from django.db.models.functions import ExtractWeek, ExtractMonth, ExtractYear
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse, JsonResponse
-
 
 @csrf_protect
-def test(request):
-    total_miles = None
-
-    start_date_str = request.POST.get('startDate')
-    
-
-    end_date_str = request.POST.get('endDate')
-    return HttpResponse(start_date_str,end_date_str)
-    try:
-        start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date()
-        end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date()
-
-        vehicles_within_range = Vehicle.objects.filter(date__range=[start_date, end_date])
-
-        total_miles = vehicles_within_range.aggregate(total_miles=Sum('miles_driven'))['total_miles']
-
-        total_miles = total_miles or 0
-    except (ValueError, Vehicle.DoesNotExist):
-        total_miles = 0
-    return render(request, 'dashboard.html', {'total_miles': total_miles})
-
-
 def index(request):
     total_miles = None
-    # if request.method == 'POST':
-    #     start_date_str = request.POST.get('startDate')
-    #     end_date_str = request.POST.get('endDate')
+    if request.method == 'POST':
+        start_date_str = request.POST.get('startDate')
+        end_date_str = request.POST.get('endDate')
 
-    #     try:
-    #         start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date()
-    #         end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date()
+        try:
+            start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date()
+            end_date = datetime.datetime.strptime(end_date_str, '%Y-%m-%d').date()
 
-    #         vehicles_within_range = Vehicle.objects.filter(date__range=[start_date, end_date])
+            vehicles_within_range = Vehicle.objects.filter(date__range=[start_date, end_date])
 
-    #         total_miles = vehicles_within_range.aggregate(total_miles=Sum('miles_driven'))['total_miles']
+            total_miles = vehicles_within_range.aggregate(total_miles=Sum('miles_driven'))['total_miles']
 
-    #         total_miles = total_miles or 0
-    #     except (ValueError, Vehicle.DoesNotExist):
-    #         total_miles = 0  
+            total_miles = total_miles or 0
+        except (ValueError, Vehicle.DoesNotExist):
+            total_miles = 0  
 
     return render(request, 'dashboard.html', {'total_miles': total_miles})
 
