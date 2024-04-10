@@ -26,10 +26,11 @@ def index(request):
 
     return render(request, 'dashboard.html', {'total_miles': total_miles})
 
-def total_miles_report(request):
-    total_miles = request.GET.get('total_miles', 0)
-    return render(request, 'total_miles_report.html', {'total_miles': total_miles})
+# def total_miles_report(request):
+#     total_miles = request.GET.get('total_miles', 0)
+#     return render(request, 'total_miles_report.html', {'total_miles': total_miles})
 
+@csrf_protect
 def detailed_report(request):
     report_data = None
     if request.method == 'POST':
@@ -66,7 +67,7 @@ def detailed_report(request):
 
     return render(request, 'detailed_report.html', {'report_data': report_data})
 
-
+@csrf_protect
 def date_range_report(request):
     data = None
     

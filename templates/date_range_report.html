@@ -82,16 +82,16 @@
 <div class="container mt-5">
     
     <div class="custom-form">
-        <form method="post">
-            <h3 class="mb-4 text-center">Date Range Report</h3>
+        <form action="{%  url 'date_range_report' %}" method="POST">
             {% csrf_token %}
+            <h3 class="mb-4 text-center">Date Range Report</h3>
             <div class="form-group">
                 <label for="start_date">Start Date:</label>
                 <input type="date" class="form-control" id="start_date" name="start_date" required>
             </div>
             <div class="form-group">
                 <label for="end_date">End Date:</label>
-                <input type="date" class="form-control" id="end_date" name="end_date" required>
+                <input type="date" class="form-control" id="end_date" name="end_date" required oninput="validateEndDate()">
             </div>
             <button type="submit" class="btn btn-primary">Generate Report</button>
         </form>
@@ -136,5 +136,18 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function validateEndDate() {
+        var endDateInput = document.getElementById('end_date');
+        var endDate = new Date(endDateInput.value);
+        var currentDate = new Date();
+
+        if (endDate > currentDate) {
+            endDateInput.valueAsDate = currentDate;
+        }
+    }
+</script>
+
 </body>
 </html>

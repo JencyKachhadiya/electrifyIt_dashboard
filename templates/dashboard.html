@@ -88,7 +88,7 @@
             </div>
             <div class="form-group">
                 <label for="endDate">End Date:</label>
-                <input type="date" class="form-control" id="endDate" name="endDate" required>
+                <input type="date" class="form-control" id="endDate" name="endDate" required oninput="validateEndDate()">
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Generate Report</button>
@@ -105,12 +105,23 @@
     </div>
     {% endif %}
 
-
-
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function validateEndDate() {
+        var endDateInput = document.getElementById('endDate');
+        var endDate = new Date(endDateInput.value);
+        var currentDate = new Date();
+
+        if (endDate > currentDate) {
+            endDateInput.valueAsDate = currentDate;
+        }
+    }
+</script>
+
 </body>
 </html>
